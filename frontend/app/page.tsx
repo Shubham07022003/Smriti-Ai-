@@ -1,17 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
 import React from "react";
-import BlurIn from "@/components/magicui/blur-in";
-import AnimatedImage from "@/components/AnimatedImage";
 import Link from "next/link";
-import { DotPattern } from "@/components/magicui/dot-pattern";
-import { cn } from "@/lib/utils";
-import { SparklesText } from "@/components/magicui/sparkles-text";
-import { NumberTicker } from "@/components/magicui/number-ticker";
-import { Button } from "@/components/ui/button";
-import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+import { motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
+import AnimatedImage from "@/components/AnimatedImage";
+import BlurIn from "@/components/magicui/blur-in";
+import { DotPattern } from "@/components/magicui/dot-pattern";
+import { NumberTicker } from "@/components/magicui/number-ticker";
+import { SparklesText } from "@/components/magicui/sparkles-text";
 
 import Navbar from "@/components/navbar";
 
