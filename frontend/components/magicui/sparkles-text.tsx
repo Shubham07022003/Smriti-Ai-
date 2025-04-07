@@ -118,7 +118,7 @@ export const SparklesText: React.FC<SparklesTextProps> = ({
           } else {
             return { ...star, lifespan: star.lifespan - 0.1 };
           }
-        }),
+        })
       );
     };
 
@@ -130,7 +130,6 @@ export const SparklesText: React.FC<SparklesTextProps> = ({
 
   return (
     <div
-      className={cn("text-6xl font-bold", className)}
       {...props}
       style={
         {
