@@ -3,6 +3,8 @@
 import { motion } from "motion/react";
 import { CSSProperties, ReactElement, useEffect, useState } from "react";
 
+import { cn } from "@/lib/utils";
+
 interface Sparkle {
   id: string;
   x: string;
@@ -128,6 +130,7 @@ export const SparklesText: React.FC<SparklesTextProps> = ({
 
   return (
     <div
+      className={cn(className)}
       {...props}
       style={
         {
