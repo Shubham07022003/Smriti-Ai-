@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const raleway = Raleway({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-raleway",
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -19,17 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${raleway.variable} font-sans antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en" className="dark">
+      <body className={`${poppins.variable} antialiased`}>{children}</body>
     </html>
   );
 }

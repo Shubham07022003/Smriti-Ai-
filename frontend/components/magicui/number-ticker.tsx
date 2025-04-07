@@ -49,15 +49,15 @@ export function NumberTicker({
           }).format(Number(latest.toFixed(decimalPlaces)));
         }
       }),
-    [springValue, decimalPlaces],
+    [springValue, decimalPlaces]
   );
 
   return (
     <span
       ref={ref}
       className={cn(
-        "inline-block tabular-nums tracking-wider text-black dark:text-white",
-        className,
+        "inline-block tabular-nums tracking-wider text-black dark:text-muted-foreground",
+        className
       )}
       {...props}
     >

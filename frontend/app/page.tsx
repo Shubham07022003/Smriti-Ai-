@@ -9,7 +9,9 @@ import { DotPattern } from "@/components/magicui/dot-pattern";
 import { cn } from "@/lib/utils";
 import { SparklesText } from "@/components/magicui/sparkles-text";
 import { NumberTicker } from "@/components/magicui/number-ticker";
-import { Brain } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+import { ArrowRightIcon } from "lucide-react";
 
 import Navbar from "@/components/navbar";
 
@@ -40,10 +42,9 @@ export default function Hero() {
               "absolute inset-0 z-0 [mask-image:radial-gradient(50vw_circle_at_center,white,transparent)] dark:[mask-image:radial-gradient(50vw_circle_at_center,black,transparent)]"
             )}
           />
-          <p className="flex items-center mb-6 border border-neutral-300 rounded-3xl text-xs px-3 py-[3px] shadow-[3px_3px_0px_0px_rgb(143,143,143)]">
-            <Brain className="me-[5px] h-3 w-3" />
-            Remember Smarter
-          </p>
+
+          <span>🧠 Remember Smarter</span>
+
           <motion.div variants={itemVariants}>
             <BlurIn
               word={
@@ -51,7 +52,7 @@ export default function Hero() {
                   <span>Watch. Read. </span>
                   <br />
                   <SparklesText className="inline" text="Remember." />
-                  <span> Repeat</span>
+                  <span> Repeat.</span>
                 </>
               }
               className="font-display text-center text-4xl font-bold w-full lg:w-auto max-w-4xl mx-auto -z-10"
@@ -62,13 +63,16 @@ export default function Hero() {
             className="text-xl text-muted-foreground tracking-normal text-center max-w-2xl mx-auto z-10"
             variants={itemVariants}
           >
-            Upload course videos and PDFs, we'll create personalized MCQs and
-            send them to you on WhatsApp to help you{" "}
-            <NumberTicker value={100} />% retain what you learn.
+            Upload your courses videos & notes, get custom MCQs on WhatsApp, and
+            retain <NumberTicker value={100} />% more effectively.
           </motion.h2>
+
           <motion.div variants={itemVariants} className="z-20">
-            <Link href="/dashboard">
-              <button className="btn-primary">Get Started</button>
+            <Link href="/dashboard" passHref>
+              <Button className="bg-primary text-black rounded-full">
+                Get Started
+                <ArrowRightIcon className="w-8 h-8 transform transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
             </Link>
           </motion.div>
           <motion.div variants={itemVariants}>
