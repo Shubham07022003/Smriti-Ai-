@@ -1,3 +1,11 @@
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Brain } from "lucide-react";
@@ -11,22 +19,26 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <Brain className="me-[5px] h-5 w-5 text-primary" />
-
               <span className="text-xl font-bold">Smriti AI</span>
             </Link>
           </div>
 
           {/* Right side buttons */}
           <div className="flex items-center gap-4">
-            {/* Auth Buttons */}
-            <Link href="/sign-in">
-              <Button variant="outline" className="rounded-full">
-                Sign In
-              </Button>
-            </Link>
-            <Link href="/sign-up">
-              <Button className="bg-primary rounded-full">Sign Up</Button>
-            </Link>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button variant="outline" className="rounded-full">
+                  Sign In
+                </Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button className="bg-primary rounded-full">Sign Up</Button>
+              </SignUpButton>
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </div>

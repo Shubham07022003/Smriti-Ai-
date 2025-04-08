@@ -14,8 +14,6 @@ import { DotPattern } from "@/components/magicui/dot-pattern";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { SparklesText } from "@/components/magicui/sparkles-text";
 
-import Navbar from "@/components/navbar";
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.3 } },
@@ -28,8 +26,7 @@ const itemVariants = {
 
 export default function Hero() {
   return (
-    <div>
-      <Navbar />
+    <main>
       {/* Hero Section */}
       <div className="z-0 relative min-h-screen w-full overflow-hidden">
         <motion.div
@@ -87,6 +84,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-    </div>
+    </main>
   );
 }
