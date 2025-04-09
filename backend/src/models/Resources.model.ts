@@ -15,7 +15,7 @@ const ResourceSchema: Schema<IResource> = new Schema(
   {
     type: {
       type: String,
-      enum: ['pdf', 'youtube', 'article'],
+      enum: ['pdf', 'youtube'],
       required: true,
     },
     title: {
@@ -31,7 +31,7 @@ const ResourceSchema: Schema<IResource> = new Schema(
       ref: 'Folder',
       required: true,
     },
-    summary: String,
+    summary:{ String},
     uploadedAt: {
       type: Date,
       default: Date.now,
