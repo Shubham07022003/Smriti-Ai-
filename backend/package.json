@@ -19,10 +19,13 @@
   },
   "homepage": "https://github.com/Aditya-Rawat01/Smriti-Ai-#readme",
   "dependencies": {
+    "@clerk/express": "^1.4.2",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "cloudinary": "^2.6.0",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2",
     "multer": "^1.4.5-lts.2",
     "typescript": "^5.8.3"

@@ -1,10 +1,4 @@
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -26,14 +20,14 @@ export default function Navbar() {
           {/* Right side buttons */}
           <div className="flex items-center gap-4">
             <SignedOut>
-              <SignInButton mode="modal">
+              <Link href="/sign-in">
                 <Button variant="outline" className="rounded-full">
                   Sign In
                 </Button>
-              </SignInButton>
-              <SignUpButton mode="modal">
+              </Link>
+              <Link href="/sign-up">
                 <Button className="bg-primary rounded-full">Sign Up</Button>
-              </SignUpButton>
+              </Link>
             </SignedOut>
 
             <SignedIn>

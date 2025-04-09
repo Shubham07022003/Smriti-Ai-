@@ -13,6 +13,8 @@ import BlurIn from "@/components/magicui/blur-in";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { SparklesText } from "@/components/magicui/sparkles-text";
+import About from "@/components/About";
+import { Pricing } from "@/components/Pricing";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -83,6 +85,8 @@ export default function Hero() {
             />
           </motion.div>
         </motion.div>
+        <About />
+        <Pricing />
       </div>
     </main>
   );
