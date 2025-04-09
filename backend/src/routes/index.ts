@@ -6,10 +6,13 @@ import { clerkMiddleware } from "@clerk/express";
 import { tokenMiddleware } from '../middlewares/tokenMiddleware';
 
 const router = express.Router();
-
-// Mount routes
-router.use(clerkMiddleware());
-router.use('/',tokenMiddleware);
+router.use(clerkMiddleware())
+router.use(tokenMiddleware)
+router.get('/me',(req,res)=>{
+    res.json({
+        "msg":"hello"
+    })
+})
 router.use('/folders', folderRoutes);// POST /api/folders
 router.use('/folders', getAllFolderRoutes); // GET /api/folders
 

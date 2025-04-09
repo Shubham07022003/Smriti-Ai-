@@ -11,6 +11,7 @@ declare global {
   namespace Express {
     interface Request {
       auth?: AuthObject;
+      email:string
     }
   }
 }
@@ -19,11 +20,11 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.get("/", (req, res) => {
-  res.json({
-    msg: process.env.PORT,
-  });
-});
+// app.get("/", (req, res) => {
+//   res.json({
+//     msg: process.env.PORT,
+//   });
+// });
 // API routes
 app.use("/api", router);
 app.post("/signup", signup);
