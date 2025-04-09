@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import connectDB from './db' // Note: must end with `.js` for ES modules
 import { Router } from 'express'
 import signup from './controllers/signup'
+import router from './routes'
 import cors from 'cors'
 dotenv.config()
 
@@ -14,6 +15,8 @@ app.get("/", (req, res) => {
         msg: process.env.PORT
     })
 })
+// API routes
+app.use('/api', router)
 app.post("/signup",signup)
 connectDB()
     .then(() => {
