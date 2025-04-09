@@ -8,13 +8,15 @@ import { ArrowRightIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
-import AnimatedImage from "@/components/AnimatedImage";
 import BlurIn from "@/components/magicui/blur-in";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { SparklesText } from "@/components/magicui/sparkles-text";
-import About from "@/components/About";
-import { Pricing } from "@/components/Pricing";
+
+import AnimatedImage from "@/components/landing/AnimatedImage";
+import About from "@/components/landing/About"
+import Features from "@/components/landing/Features";
+import { Pricing } from "@/components/landing/Pricing";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,8 +31,9 @@ const itemVariants = {
 export default function Hero() {
   return (
     <main>
-      {/* Hero Section */}
       <div className="z-0 relative min-h-screen w-full overflow-hidden">
+      {/* Hero Section */}
+        
         <motion.div
           className="relative z-10 flex flex-col items-center justify-start min-h-screen space-y-4 px-4 pt-32 pb-12"
           variants={containerVariants}
@@ -85,7 +88,14 @@ export default function Hero() {
             />
           </motion.div>
         </motion.div>
+        
+        {/* about */}
         <About />
+        
+        {/* features */}
+        <Features />
+        
+        {/* pricing plans */}
         <Pricing />
       </div>
     </main>

@@ -58,8 +58,8 @@ export const Pricing = () => {
                 {pricingPlans.map((plan) => (
                     <div
                         key={plan.title}
-                        className={`rounded-xl border border-white/10 px-8 py-10 shadow-lg backdrop-blur-md transition hover:scale-[1.02] ${plan.highlight
-                            ? "bg-gradient-to-br from-pink-600/30 to-purple-700/30 border-pink-500/30"
+                        className={`rounded-xl px-8 py-10 shadow-lg backdrop-blur-md transition hover:scale-[1.02] ${plan.highlight
+                            ? "bg-[#1a1a1a] border border-primary/70"
                             : "bg-[#1a1a1a] text-white border border-white/10"
                             }`}
                     >
