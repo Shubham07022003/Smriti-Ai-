@@ -1,6 +1,6 @@
 'use client';
 
-const AboutIntro = () => {
+const About = () => {
   return (
     <section className="min-h-screen bg-gradient-to-b from-black to-[#1a1a2e] text-white flex flex-col justify-center items-center px-6 py-20">
       <div className="max-w-4xl text-center space-y-10">
@@ -34,4 +34,4 @@ const AboutIntro = () => {
   );
 };
 
-export default AboutIntro;
+export default About;

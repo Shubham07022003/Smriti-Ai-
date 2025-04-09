@@ -1,6 +1,6 @@
 'use client';
 
-const FeaturesGrid = () => {
+const Features = () => {
   const features = [
     {
       title: '🧩 Mindmap Generator',
@@ -52,4 +52,4 @@ const FeaturesGrid = () => {
   );
 };
 
-export default FeaturesGrid;
+export default Features;
