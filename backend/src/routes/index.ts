@@ -4,6 +4,7 @@ import getAllFolderRoutes from './getAllFolder-routes';
 import getResourcesRoutes from './getResources-routes';
 import { clerkMiddleware } from "@clerk/express";
 import { tokenMiddleware } from '../middlewares/tokenMiddleware';
+import { getUser } from '../controllers/getUser';
 
 const router = express.Router();
 router.use(clerkMiddleware())
@@ -17,5 +18,5 @@ router.use('/folders', folderRoutes);// POST /api/folders
 router.use('/folders', getAllFolderRoutes); // GET /api/folders
 
 router.use('/resources', getResourcesRoutes); // GET /api/resources/:folderId
-
+router.use('/user',getUser)
 export default router;

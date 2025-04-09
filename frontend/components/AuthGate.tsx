@@ -1,12 +1,21 @@
 "use client";
 
-import { useEffect, useState, FormEvent } from "react";
+import { useEffect, useState, FormEvent, ReactNode } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import { backendURI } from "@/app/backendURL";
-
-export default function CustomSignup({
+ import { useUser } from "@clerk/nextjs";
+ 
+ export default function AuthGate({ children }:{children:ReactNode}) {
+   const { user, isLoaded } = useUser();
+   if (!isLoaded) return <div>Loading...</div>; //add any loading spinner (vatsal)
+   if (!user!.publicMetadata?.onboarded) {
+    return <CustomSignup email={user?.primaryEmailAddress?.emailAddress!} userId={user?.id!}/>;
+  }
+  return children
+}
+function CustomSignup({
   email,
   userId,
 }: {
@@ -44,6 +53,9 @@ export default function CustomSignup({
     });
 
     if (res.status === 200) {
+      //set the jwt here in localstorage
+      const token=(res.data as { token: string }).token;
+      localStorage.setItem("backendtoken",token)
       const response = await axios.post("/api/update-metadata", { userId });
       if (response.status === 200) {
         window.location.reload();

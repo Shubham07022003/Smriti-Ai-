@@ -11,7 +11,9 @@ declare global {
   namespace Express {
     interface Request {
       auth?: AuthObject;
-      email:string
+      user:{
+        _id:string
+      }
     }
   }
 }

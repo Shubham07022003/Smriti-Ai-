@@ -1,5 +1,6 @@
 import {  Request, Response } from "express";
-
+import jwt from 'jsonwebtoken'
+import { User } from "../models/User.model";
 const signup = async (req: Request, res: Response) => {
     try{
        const {email,username,mobile,age} =req.body
@@ -7,10 +8,16 @@ const signup = async (req: Request, res: Response) => {
         res.status(401).json({"msg":"Some fields are empty"}) 
         return
     }
-
-       // create user db call 
-       console.log({email,username,mobile,age})
-       res.status(200).json({"msg":req.body})
+      const user=await User.create({
+         email,
+         username,
+         mobile,
+         age,
+         password:"Default password" //redundant field. should be optional
+      })
+    
+       const token=jwt.sign({token:user._id},process.env.JWT_SECRET as string)
+       res.status(200).json({"msg":"User created successfully",token})
     }
     catch (error) {
        // catch error.
