@@ -2,11 +2,14 @@ import express from 'express';
 import folderRoutes from './createfolder-routes';
 import getAllFolderRoutes from './getAllFolder-routes';
 import getResourcesRoutes from './getResources-routes';
-
+import { clerkMiddleware } from "@clerk/express";
+import { tokenMiddleware } from '../middlewares/tokenMiddleware';
 
 const router = express.Router();
 
 // Mount routes
+router.use(clerkMiddleware());
+router.use('/',tokenMiddleware);
 router.use('/folders', folderRoutes);// POST /api/folders
 router.use('/folders', getAllFolderRoutes); // GET /api/folders
 
