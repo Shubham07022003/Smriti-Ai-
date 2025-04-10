@@ -4,7 +4,7 @@ import{Folder} from '../models/folder.model'
 const createFolder = async (req: any, res: any) => {
 
     try{
-        const { title, description } = req.body;
+        const { title, description } = req.body || {};
         if(!title) {
             return res.status(400).json({ message: "Title is required" });
         }
@@ -12,7 +12,7 @@ const createFolder = async (req: any, res: any) => {
             return res.status(400).json({ message: "Description is required" });
         }
         
-        const userId = req.user._id; 
+        const userId = req.user._id; // Assuming you have middleware that sets req.user
         if(!userId) {
             return res.status(401).json({ message: "Unauthorized" });
         }
