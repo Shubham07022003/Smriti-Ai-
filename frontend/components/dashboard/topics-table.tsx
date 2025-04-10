@@ -36,6 +36,7 @@ import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, Clock, PauseCircle } from "lucide-react"
 import { backendURI } from "@/app/backendURL"
 import axios from "axios"
+import Link from "next/link"
 
 export type Topic = {
   id: string
@@ -242,10 +243,10 @@ export function TopicsTable(): React.JSX.Element {
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
+                      <Link href={`/dashboard/topic/${row.original.id}`}>{flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
-                      )}
+                      )}</Link>
                     </TableCell>
                   ))}
                 </TableRow>
