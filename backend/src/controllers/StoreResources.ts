@@ -82,5 +82,3 @@ const StoreResources = async (req: any, res: any) => {
 };
 
 export { StoreResources };
-
-
