@@ -48,7 +48,7 @@ function CustomSignup({
     const res = await axios.post(`${backendURI}/signup`, {
       email,
       mobile: `+${phone}`,
-      numAge,
+      age: numAge,
       username,
     });
 

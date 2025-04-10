@@ -5,6 +5,7 @@ export interface IResource extends Document {
   title: string;
   url: string;
   folderId: Types.ObjectId;
+  userId: Types.ObjectId;
   summary?: string;
   uploadedAt: Date;
   createdAt: Date;
@@ -29,6 +30,11 @@ const ResourceSchema: Schema<IResource> = new Schema(
     folderId: {
       type: Schema.Types.ObjectId,
       ref: 'Folder',
+      required: true,
+    },
+    userId:{
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     summary:{ String},

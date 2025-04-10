@@ -1,6 +1,6 @@
-import { Resource } from "../models/Resources.model";
+import { Folder } from "../models/folder.model";
 
-const getResources = async (req: any, res: any) => {
+const getOneFolder = async (req: any, res: any) => {
     try{
         const { folderId } = req.params;
         if (!folderId) {
@@ -13,11 +13,13 @@ const getResources = async (req: any, res: any) => {
         }
 
         // Fetch resources for the specified folder
-        const resources = await Resource.find({ folderId, userId });
+        const folder = await Folder.findOne({ 
+            _id:folderId,
+             userId });
         // if (!resources || resources.length === 0) {
         //     return res.status(404).json({ message: "No resources found for this folder" });
         // }
-        return res.status(200).json({ message: "Resources fetched successfully", resources });
+        return res.status(200).json({ message: "Folder fetched successfully", folder });
     }
     catch (error) {
         console.error("Error fetching resources:", error);
@@ -25,4 +27,4 @@ const getResources = async (req: any, res: any) => {
     }
 }
 
-export { getResources };
+export { getOneFolder };
