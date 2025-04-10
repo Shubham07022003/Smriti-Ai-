@@ -154,8 +154,28 @@ body {
   --color-primary: #adff2f;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn-primary {
-    transition: none;
-  }
+/* Webkit-based browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Invisible track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.4); /* Subtle dark gray */
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.6); /* Slightly darker on hover */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 100, 100, 0.4) transparent;
 }
