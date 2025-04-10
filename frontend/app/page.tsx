@@ -14,7 +14,7 @@ import { NumberTicker } from "@/components/magicui/number-ticker";
 import { SparklesText } from "@/components/magicui/sparkles-text";
 
 import AnimatedImage from "@/components/landing/AnimatedImage";
-import About from "@/components/landing/About"
+import About from "@/components/landing/About";
 import Features from "@/components/landing/Features";
 import { Pricing } from "@/components/landing/Pricing";
 
@@ -32,8 +32,8 @@ export default function Hero() {
   return (
     <main>
       <div className="z-0 relative min-h-screen w-full overflow-hidden">
-      {/* Hero Section */}
-        
+        {/* Hero Section */}
+
         <motion.div
           className="relative z-10 flex flex-col items-center justify-start min-h-screen space-y-4 px-4 pt-32 pb-12"
           variants={containerVariants}
@@ -46,7 +46,9 @@ export default function Hero() {
             )}
           />
 
-          <span>🧠 Remember Smarter</span>
+          <span className="bg-muted px-4 py-1 rounded-full relative z-10 text-xs border-2 border-neutral-600">
+            🧠 | Remember Smarter
+          </span>
 
           <motion.div variants={itemVariants}>
             <BlurIn
@@ -88,13 +90,13 @@ export default function Hero() {
             />
           </motion.div>
         </motion.div>
-        
+
         {/* about */}
         <About />
-        
+
         {/* features */}
         <Features />
-        
+
         {/* pricing plans */}
         <Pricing />
       </div>
