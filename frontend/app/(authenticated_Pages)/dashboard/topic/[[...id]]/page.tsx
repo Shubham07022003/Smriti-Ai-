@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { FileText, PlusCircle, Pencil, X } from "lucide-react";
+import { FileText, PlusCircle, Pencil, X, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -28,6 +28,12 @@ export default function NewTopicPage() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [pdfTitle, setPdfTitle] = useState("");
   const [pdfFile, setPdfFile] = useState<File | null>(null);
+
+  const [search, setSearch] = useState("");
+
+  const filteredMedia = media.filter((item) =>
+    item.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   const router = useRouter();
 
@@ -126,7 +132,7 @@ export default function NewTopicPage() {
     <div className="min-h-screen bg-background text-foreground max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-14">
       {/* Custom Modal for Topic Name */}
       {topicModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
           <div className="bg-white dark:bg-zinc-900 rounded-md p-6 w-full max-w-md shadow-lg">
             <h2 className="text-xl font-semibold mb-4">
               {editMode ? "Edit Topic Name" : "Enter Topic Name"}
@@ -145,19 +151,22 @@ export default function NewTopicPage() {
         </div>
       )}
 
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <h2
-          className="text-2xl font-bold flex items-center gap-2"
+          className="text-2xl font-bold flex items-center gap-2 cursor-pointer group transition"
           onClick={() => setTopicModalOpen(true)}
         >
-          <Pencil className="h-5 w-5 text-muted-foreground" />
-          {topicName}
+          <Pencil className="h-5 w-5 text-muted-foreground group-hover:text-primary transition" />
+          <span className="group-hover:underline group-hover:text-primary transition">
+            {topicName}
+          </span>
         </h2>
-        <Button onClick={() => setResourceModalOpen(true)}>
-          <PlusCircle className="mr-2 h-4 w-4" /> Add Resource
+
+        <Button onClick={() => setResourceModalOpen(true)} className="gap-2">
+          <PlusCircle className="h-4 w-4" />
+          Add Resource
         </Button>
       </div>
-
       {/* Custom Modal for Adding Resources */}
       {resourceModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -229,8 +238,24 @@ export default function NewTopicPage() {
         </div>
       )}
 
+      {/* Search Bar */}
+      {media.length > 0 && (
+        <div className="mb-6 flex items-center justify-center">
+          <div className="relative w-full sm:max-w-md">
+            <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search resources..."
+              className="pl-10 pr-4 py-2 rounded-xl border border-muted-foreground/30 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-background"
+            />
+            <Search className="absolute left-3 top-2 text-muted-foreground h-5 w-5" />
+          </div>
+        </div>
+      )}
+
+      {/* Resource Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {media.map((item) => (
+        {filteredMedia.map((item) => (
           <Card
             key={item.id}
             className="cursor-pointer hover:ring-2 hover:ring-primary transition flex flex-col py-0 gap-0"
