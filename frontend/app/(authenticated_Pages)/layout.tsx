@@ -20,7 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+<<<<<<< HEAD
       // <AuthGate>{children}</AuthGate>
       <div>{children}</div>
+=======
+    <AuthGate>{children}</AuthGate>
+    // <div>{children}</div>
+>>>>>>> 8b6df53653452efae072141f8af0ba5f9d4ac6e5
   );
 }
