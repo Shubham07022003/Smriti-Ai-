@@ -6,6 +6,7 @@ import { LearningStatusChart } from "@/components/dashboard/learning-chart";
 import { Award, CalendarCheck } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const stats = [
   {
@@ -35,7 +36,9 @@ export default function Page() {
               Welcome back! 👋
             </h1>
           </div>
-          <Button variant="default">New Topic</Button>
+          <Link href="/dashboard/topic/">
+            <Button variant="default">New Topic</Button>
+          </Link>
         </div>
 
         {/* Performance Chart */}
