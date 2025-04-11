@@ -1,3 +1,4 @@
+
 import { Request, Response } from "express";
 import { Resource } from "../models/Resources.model";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -79,6 +80,7 @@ async function generateContent(content: string): Promise<GeneratedContent> {
         // Split response into sections
         const summaryMatch = text.match(/---SUMMARY---([\s\S]*?)---MERMAID---/);
         const mermaidMatch = text.match(/---MERMAID---([\s\S]*?)---QUESTIONS---/);
+        //console.log("Mermaid Match = ", mermaidMatch)
         const questionsMatch = text.match(/---QUESTIONS---([\s\S]*?)$/);
 
          // Parse questions into structured format

@@ -1,12 +1,12 @@
 import express from 'express';
-import { updateResourceSummary } from '../controllers/storedatawithout folder';
+import { getResourceById } from '../controllers/getdata';
 
 const router = express.Router();
 
 // Update resource summary route
-router.patch('/', async (req: express.Request, res: express.Response) => {
+router.get('/', async (req: express.Request, res: express.Response) => {
     try {
-        await updateResourceSummary(req, res);
+        await getResourceById(req, res);
     } catch (error) {
         res.status(500).json({
             success: false,
