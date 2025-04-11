@@ -2,6 +2,8 @@
 import { useState } from "react";
 import QuizQuestion from "./QuizQuestion";
 import QuizFinalResult from "./QuizResult";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
 
 const quizData = [
   {
@@ -71,7 +73,7 @@ export default function QuizContainer() {
           <div className="w-full mb-6">
             <div className="w-full h-2 bg-zinc-700 rounded-full">
               <div
-                className="h-2 bg-lime-400 rounded-full transition-all duration-300"
+                className="h-2 bg-primary rounded-full transition-all duration-300"
                 style={{ width: `${(currentQ / total) * 100}%` }}
               />
             </div>
@@ -91,15 +93,29 @@ export default function QuizContainer() {
                 selected={selected}
                 setSelected={setSelected}
               />
-      
-              <div className="mt-6 text-right">
+      <div className="flex items-center justify-between">
+            <div className="mt-6 flex justify-between items-center">
+              {currentQ > 0 ? (
                 <button
-                  onClick={handleSubmit}
-                  disabled={!selected}
-                  className="bg-lime-400 text-black px-4 py-2 rounded hover:bg-lime-300"
+                  onClick={() => setCurrentQ((prev) => prev - 1)}
+                  className="flex items-center gap-2 bg-primary text-black px-4 py-2 rounded hover:bg-lime-300"
                 >
-                  {currentQ === total - 1 ? "Finish Quiz" : "Next"}
+                  <ArrowLeft size={16} />
+                  Previous
                 </button>
+              ) : <div />} {/* placeholder to align with next btn */}
+      </div>
+
+          <div className="mt-6 text-right">
+            <button
+              onClick={handleSubmit}
+              // disabled={!selected}
+              className="bg-primary text-black px-4 py-2 rounded hover:bg-lime-300 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {currentQ === total - 1 ? "Finish Quiz" : "Next"}
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
               </div>
             </>
           ) : (

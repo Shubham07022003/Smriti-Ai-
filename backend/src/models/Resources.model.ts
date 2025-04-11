@@ -5,6 +5,7 @@ export interface IResource extends Document {
   title: string;
   url: string;
   folderId: Types.ObjectId;
+  userId: Types.ObjectId;
   summary?: string;
   mermaid_syntax?: string;
   uploadedAt: Date;
@@ -32,7 +33,6 @@ const ResourceSchema: Schema<IResource> = new Schema(
       ref: 'folder',
       required: true,
     },
-    
     summary:{ String},
     mermaid_syntax: {  // Add new field
       type: String

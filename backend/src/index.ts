@@ -33,7 +33,7 @@ app.use("/api", router);
 app.post("/signup", signup);
 connectDB()
   .then(() => {
-    app.listen(process.env.PORT || 4000, () => {
+    app.listen(process.env.PORT || 5000, () => {
       console.log(`⚙️ Server is running at port: ${process.env.PORT}`);
     });
   })
