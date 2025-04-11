@@ -73,7 +73,7 @@ export default function Hero() {
           </motion.h2>
 
           <motion.div variants={itemVariants} className="z-20">
-            <Link href="/dashboard" passHref>
+            <Link href="/sign-up" passHref>
               <Button className="bg-primary text-black rounded-full">
                 Get Started
                 <ArrowRightIcon className="w-8 h-8 transform transition-transform duration-300 group-hover:translate-x-1" />
