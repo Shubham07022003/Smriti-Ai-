@@ -4,6 +4,6 @@ import { getResources } from '../controllers/getResources';
 const router = express.Router();
 
 // Get resources route
-router.get('/:folderId', getResources);
+router.get('/', getResources);
 
 export default router;
