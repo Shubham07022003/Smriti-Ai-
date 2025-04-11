@@ -73,7 +73,7 @@ export default function Hero() {
           </motion.h2>
 
           <motion.div variants={itemVariants} className="z-20">
-            <Link href="/dashboard" passHref>
+            <Link href="/sign-up" passHref>
               <Button className="bg-primary text-black rounded-full">
                 Get Started
                 <ArrowRightIcon className="w-8 h-8 transform transition-transform duration-300 group-hover:translate-x-1" />
@@ -82,7 +82,7 @@ export default function Hero() {
           </motion.div>
           <motion.div variants={itemVariants}>
             <AnimatedImage
-              src="/dummy.svg"
+              src="/dashboard.png"
               alt="Image"
               width={1200}
               height={900}
