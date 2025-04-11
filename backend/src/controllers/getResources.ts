@@ -72,6 +72,7 @@ const getResources = async (req: any, res: any) => {
         const resources = await Resource.find({ folderId });
         console.log("Found resources:", resources); // Add logging
 
+
         return res.status(200).json({
             success: true,
             message: resources.length ? "Resources retrieved successfully" : "No resources found in folder",

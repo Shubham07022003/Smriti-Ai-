@@ -34,6 +34,9 @@ import {
 
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, Clock, PauseCircle } from "lucide-react"
+import { backendURI } from "@/app/backendURL"
+import axios from "axios"
+import Link from "next/link"
 
 export type Topic = {
   id: string
@@ -42,32 +45,35 @@ export type Topic = {
   progress: number // percentage
 }
 
-const data: Topic[] = [
-  {
-    id: "t1",
-    title: "React Basics",
-    status: "learning",
-    progress: 45,
-  },
-  {
-    id: "t2",
-    title: "TypeScript Essentials",
-    status: "completed",
-    progress: 100,
-  },
-  {
-    id: "t3",
-    title: "State Management",
-    status: "paused",
-    progress: 20,
-  },
-  {
-    id: "t4",
-    title: "Next.js Fundamentals",
-    status: "learning",
-    progress: 60,
-  },
-]
+
+
+
+// [
+//   {
+//     id: "t1",
+//     title: "React Basics",
+//     status: "learning",
+//     progress: 45,
+//   },
+//   {
+//     id: "t2",
+//     title: "TypeScript Essentials",
+//     status: "completed",
+//     progress: 100,
+//   },
+//   {
+//     id: "t3",
+//     title: "State Management",
+//     status: "paused",
+//     progress: 20,
+//   },
+//   {
+//     id: "t4",
+//     title: "Next.js Fundamentals",
+//     status: "learning",
+//     progress: 60,
+//   },
+// ]
 
 export const columns: ColumnDef<Topic>[] = [
   {
@@ -136,7 +142,7 @@ export function TopicsTable(): React.JSX.Element {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState<Record<string, boolean>>({})
-
+  const [data,setData]: [data:Topic[]|[], SetData:any] = React.useState([])
   const table = useReactTable<Topic>({
     data,
     columns,
@@ -155,7 +161,29 @@ export function TopicsTable(): React.JSX.Element {
       rowSelection,
     },
   })
-
+  React.useEffect(()=>{
+    async function Datafetcher() {
+      try {
+        const res=await axios.get(`${backendURI}/api/folders`,{
+        headers:{
+          backendtoken:localStorage.getItem('backendtoken')
+        }
+      })
+      const transformed = (res.data as any).folders.map(({ _id, ...rest }:{_id:any}) => ({
+        id: _id,
+        progress:Math.round(Math.random()*100),
+        status:Math.round(Math.random()*100)%3==0?"learning":(Math.round(Math.random()*100)%2==0?"completed":"paused"),
+        ...rest,
+      }));
+      setData(transformed)
+      } catch (error) {
+        console.log("Error occurred",error) // toast error here
+      }
+      
+    }
+  
+    Datafetcher()
+  },[])
   return (
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
@@ -215,10 +243,10 @@ export function TopicsTable(): React.JSX.Element {
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
+                      <Link href={`/dashboard/topic/${row.original.id}`}>{flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
-                      )}
+                      )}</Link>
                     </TableCell>
                   ))}
                 </TableRow>

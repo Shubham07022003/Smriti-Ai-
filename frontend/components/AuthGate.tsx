@@ -6,10 +6,11 @@ import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import { backendURI } from "@/app/backendURL";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner"
 
 export default function AuthGate({ children }: { children: ReactNode }) {
   const { user, isLoaded } = useUser();
-  if (!isLoaded) return <div>Loading...</div>; //add any loading spinner (vatsal)
+  if (!isLoaded || !user!.publicMetadata?.onboarded) return <div></div>; //add any loading spinner (vatsal)
   if (!user!.publicMetadata?.onboarded) {
     return (
       <CustomSignup
@@ -25,7 +26,7 @@ function CustomSignup({ email, userId }: { email: string; userId: string }) {
   const [age, setAge] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [defaultCountry, setDefaultCountry] = useState<string>("in");
-
+  const [isLoading,setIsLoading]=useState(false);
   // Fetch country code by IP
   useEffect(() => {
     fetch("https://ipapi.co/json")
@@ -42,7 +43,7 @@ function CustomSignup({ email, userId }: { email: string; userId: string }) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+    setIsLoading(true)
     const numAge = parseInt(age, 10);
     const res = await axios.post(`${backendURI}/signup`, {
       email,
@@ -55,11 +56,13 @@ function CustomSignup({ email, userId }: { email: string; userId: string }) {
       //set the jwt here in localstorage
       const token = (res.data as { token: string }).token;
       localStorage.setItem("backendtoken", token);
+      toast.success((res.data as {message:string}).message)
       const response = await axios.post("/api/update-metadata", { userId });
       if (response.status === 200) {
         window.location.reload();
       }
     }
+    setIsLoading(false)
   }
 
   return (
@@ -125,8 +128,9 @@ function CustomSignup({ email, userId }: { email: string; userId: string }) {
         <button
           type="submit"
           className="w-full py-2 rounded-lg bg-primary text-black font-semibold hover:opacity-90 transition"
+          disabled={isLoading}
         >
-          Submit
+          {isLoading?"Loading... Please Wait":"Submit"}
         </button>
       </form>
     </div>
