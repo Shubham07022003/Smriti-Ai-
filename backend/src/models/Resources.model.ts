@@ -6,6 +6,7 @@ export interface IResource extends Document {
   url: string;
   folderId: Types.ObjectId;
   summary?: string;
+  mermaid_syntax?: string;
   uploadedAt: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -28,10 +29,15 @@ const ResourceSchema: Schema<IResource> = new Schema(
     },
     folderId: {
       type: Schema.Types.ObjectId,
-      ref: 'Folder',
+      ref: 'folder',
       required: true,
     },
+    
     summary:{ String},
+    mermaid_syntax: {  // Add new field
+      type: String
+    },
+    
     uploadedAt: {
       type: Date,
       default: Date.now,
