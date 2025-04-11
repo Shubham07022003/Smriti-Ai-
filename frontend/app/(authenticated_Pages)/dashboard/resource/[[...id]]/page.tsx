@@ -34,7 +34,7 @@ export default function ResourceChatPage() {
         </div>
 
         {/* Chat Area */}
-        <div className="overflow-y-auto">
+        <div className="overflow-y-auto h-full">
           <div className="flex-1 px-2 sm:px-0 space-y-4 max-w-7xl mx-auto pb-20">
             {messages.map((msg, idx) => (
               <div
