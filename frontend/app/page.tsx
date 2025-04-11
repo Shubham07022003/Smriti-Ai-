@@ -82,7 +82,7 @@ export default function Hero() {
           </motion.div>
           <motion.div variants={itemVariants}>
             <AnimatedImage
-              src="/dummy.svg"
+              src="/dashboard.png"
               alt="Image"
               width={1200}
               height={900}
