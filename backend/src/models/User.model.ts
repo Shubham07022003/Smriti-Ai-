@@ -29,7 +29,7 @@ const UserSchema: Schema<IUser> = new Schema(
 
     password: {
       type: String,
-      required: true,
+      //required: true,
     },
     age: {
       type: Number, 
