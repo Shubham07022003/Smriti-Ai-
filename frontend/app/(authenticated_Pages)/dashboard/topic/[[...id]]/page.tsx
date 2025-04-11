@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { backendURI } from "@/app/backendURL";
 import axios from "axios";
 import { use } from 'react';
+import { toast } from "sonner";
 const getYouTubeThumbnail = (url: string) => {
   const match = url.match(/(?:v=|\.be\/)([\w-]{11})/);
   return match ? `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg` : "";
@@ -33,7 +34,7 @@ export default function NewTopicPage({params}:{params:any}) {
   const [pdfTitle, setPdfTitle] = useState("");
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [search, setSearch] = useState("");
-
+  const [isLoading,setIsLoading]=useState(false)
   const filteredMedia = media.filter((item) =>
     item.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -47,6 +48,7 @@ export default function NewTopicPage({params}:{params:any}) {
           backendtoken:localStorage.getItem('backendtoken')
         }
       })
+      setIsLoading(true)
       const dataMedia = await axios.get(`${backendURI}/api/resources/${id}`, {
         headers:{
           backendtoken:localStorage.getItem('backendtoken')
@@ -57,6 +59,7 @@ export default function NewTopicPage({params}:{params:any}) {
         id: _id,
         ...rest,
       }));
+      setIsLoading(false)
       setTopicName((res.data as any).folder.title)
       setDescriptionName((res.data as any).folder.description)
       setMedia(transformed)
@@ -87,13 +90,14 @@ export default function NewTopicPage({params}:{params:any}) {
       })
       if (res.status===201) {
         router.push(`/dashboard/topic/${(res.data as any).folder._id}`)
+        toast.success((res.data as any).message)
         console.log("200 status")
         //toast sucess res.data.message
         console.log((res.data as any).message)
       } else {
         // res.data
         console.log("else condition")
-
+        toast.error((res.data as any).message)
         console.log((res.data as any).message)
       }
     } catch (error) {
@@ -142,6 +146,7 @@ export default function NewTopicPage({params}:{params:any}) {
 
         // TODO: Replace this with POST to /api/topic/{topicId}/resource/
         // Send payload: { id, title: videoTitle, type: "youtube", url: youtubeUrl }
+        setIsLoading(true)
         const response=await axios.post(`${backendURI}/api/resources`,{
             type:"youtube", 
             title:videoTitle, 
@@ -152,8 +157,8 @@ export default function NewTopicPage({params}:{params:any}) {
             backendtoken:localStorage.getItem('backendtoken')
           }
         })
-        console.log(response)
-        console.log(response) 
+        toast.success((response.data as any).message)
+        setIsLoading(false)
         setMedia((prev) => [
           ...prev,
           {
@@ -168,7 +173,9 @@ export default function NewTopicPage({params}:{params:any}) {
         setResourceModalOpen(false);
       } catch (error) {
         console.error("Error fetching video title:", error);
-        alert("Something went wrong while fetching the YouTube video info.");
+        setIsLoading(false)
+        toast.error("Something went wrong while fetching the YouTube video info.")
+        //alert("Something went wrong while fetching the YouTube video info.");
       }
     } else {
       if (!pdfTitle.trim() || !pdfFile) {
@@ -319,7 +326,7 @@ export default function NewTopicPage({params}:{params:any}) {
             </div>
 
             <div className="mt-4 flex justify-end">
-              <Button onClick={handleAddResource}>Add</Button>
+              <Button onClick={handleAddResource}>{isLoading?"Loading":"Add"}</Button>
             </div>
           </div>
         </div>
@@ -341,7 +348,7 @@ export default function NewTopicPage({params}:{params:any}) {
       )}
 
       {/* Resource Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      {isLoading?<div className="h-[50vh] flex items-center justify-center text-white text-lg">Loading Resources</div>:<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredMedia.map((item) => (
           <Card
             key={item.id}
@@ -368,7 +375,7 @@ export default function NewTopicPage({params}:{params:any}) {
             </CardContent>
           </Card>
         ))}
-      </div>
+      </div>}
     </div>
   );
 }
