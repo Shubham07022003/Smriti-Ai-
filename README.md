@@ -1,5 +1,5 @@
 
-# Educational App
+# Smriti-Ai
 
 This is an **educational app** designed to help users track their learning progress efficiently. The app allows you to easily store **YouTube videos** and **PDFs** of any lecture. Using **AI**, the app provides powerful features like summarizing the video content, generating **multiple-choice questions (MCQs)** based on the video, and helping you **track your learning** over time.
 
